@@ -6,11 +6,11 @@ Neste teste existem várias respostas corretas, pois o objetivo é avaliar a sua
 
 ## Obrigatoriedades
 
-O projeto deve ser desenvolvido em React, Redux e TypeScript. Utilize o CRA (create-react-app) https://facebook.github.io/create-react-app/  para realizar o bootstrap do projeto.
+O projeto deve ser desenvolvido em React, Redux e TypeScript. Utilize o [CRA (create-react-app)]( https://facebook.github.io/create-react-app/) para realizar o bootstrap do projeto.
 
-O Front-End deve utilizar Material UI: https://material-ui.com/getting-started/installation/
+O Front-End deve utilizar a lib [Material UI](https://material-ui.com/getting-started/installation/).
 
-Os produtos disponíveis devem ser recuperados através de uma API Rest, disponibilizada neste projeto. Utilize este projeto ou crie um novo e copie a pasta da api.
+Os produtos disponíveis devem ser recuperados através de uma API Rest, disponibilizada neste projeto.
 
 ## Carrinho de Compras
 
@@ -52,8 +52,8 @@ Para rodar o serviço, é necessário instalar o json-server:
 
 `npm install -g json-server`
 
-Após isso, rodar o comando: `json-server --watch rest-api/products.json`
+Após isso, rodar o comando: `json-server -p 4000 --watch rest-api/products.json`
 
-Isso irá disponibilizar uma api REST rodando no endereço http://localhost:3000/products.
+Isso irá disponibilizar uma api REST rodando no endereço http://localhost:4000/products.
 
-Um produto especifico pode ser acessado através da url http://localhost:3000/products/{id};
+Um produto especifico pode ser acessado através da url http://localhost:4000/products/{id};
