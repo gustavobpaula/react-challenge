@@ -6,11 +6,11 @@ Neste teste existem várias respostas corretas, pois o objetivo é avaliar a sua
 
 ## Obrigatoriedades
 
-O projeto deve utilizar webpack, e deve ser desenvolvido em React, e utilizar Redux para o carrinho de compras.
+O projeto deve ser desenvolvido em React, Redux e TypeScript. Utilize o CRA (create-react-app) https://facebook.github.io/create-react-app/  para realizar o bootstrap do projeto.
 
-O Front-End deve utilizar Material UI: https://material-ui-next.com/
+O Front-End deve utilizar Material UI: https://material-ui.com/getting-started/installation/
 
-Os produtos disponíveis devem ser recuperados através de uma API Rest, disponibilizada neste mesmo projeto.
+Os produtos disponíveis devem ser recuperados através de uma API Rest, disponibilizada neste projeto. Utilize este projeto ou crie um novo e copie a pasta da api.
 
 ## Carrinho de Compras
 
