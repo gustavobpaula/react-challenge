@@ -25,6 +25,7 @@
         "prettier"
     ],
     "rules": {
+        "react/jsx-one-expression-per-line": "off",
         "react/jsx-filename-extension": [
             "error",
             {
@@ -36,6 +37,10 @@
         ],
         "no-tabs": 0,
         "indent": [
+            "warn",
+            "tab"
+        ],
+        "react/jsx-indent": [
             "warn",
             "tab"
         ],
