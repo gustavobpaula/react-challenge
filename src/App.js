@@ -2,43 +2,34 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
-import Card from './Components/Card';
-import Header from './Components/Header';
+import { Provider, useDispatch } from 'react-redux';
+import store from './store';
+import Header from './components/Header';
+import ProductList from './components/ProductList';
+
 
 function App() {
+	store.dispatch((dispatch) => {
+		dispatch({ type: 'FETCH_PRODUCTS_START' });
+		fetch(' http://localhost:4000/products').then(res => res.json()).then((res) => {
+			dispatch({ type: 'RECEIVE_PRODUCTS', payload: res });
+		}).catch((err) => {
+			dispatch({ type: 'FETCH_PRODUCTS_ERROR', payload: err });
+		});
+	});
+
 	return (
-		<div className="App">
-			<CssBaseline />
-			<Header />
-			<Container fixed>
-				<Grid container direction="row" justify="flex-start" alignItems="left" spacing={3}>
-					<Grid item xs="12" sm="6" lg="3">
-						<Card />
+		<Provider store={store}>
+			<div className="App">
+				<CssBaseline />
+				<Header />
+				<Container fixed>
+					<Grid container direction="row" justify="flex-start" spacing={3}>
+						<ProductList />
 					</Grid>
-					<Grid item xs="12" sm="6" lg="3">
-						<Card />
-					</Grid>
-					<Grid item xs="12" sm="6" lg="3">
-						<Card />
-					</Grid>
-					<Grid item xs="12" sm="6" lg="3">
-						<Card />
-					</Grid>
-					<Grid item xs="12" sm="6" lg="3">
-						<Card />
-					</Grid>
-					<Grid item xs="12" sm="6" lg="3">
-						<Card />
-					</Grid>
-					<Grid item xs="12" sm="6" lg="3">
-						<Card />
-					</Grid>
-					<Grid item xs="12" sm="6" lg="3">
-						<Card />
-					</Grid>
-				</Grid>
-			</Container>
-		</div>
+				</Container>
+			</div>
+		</Provider>
 	);
 }
 
