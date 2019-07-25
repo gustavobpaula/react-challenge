@@ -1,12 +1,10 @@
 import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-import Popper from '@material-ui/core/Popper';
+import {IconButton, Badge, Popper, Fade, Paper, Typography, Divider } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import Fade from '@material-ui/core/Fade';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import { useSelector } from 'react-redux';
+import CurrencyFormat from 'react-currency-format';
+import CartItem from './CartItem';
 
 const StyledBadge = withStyles(theme => ({
 	badge: {
@@ -23,32 +21,55 @@ const useStyles = makeStyles(theme => ({
 	typography: {
 		padding: theme.spacing(2),
 	},
+	paper: {
+		maxHeight: 450,
+		overflowY: 'auto',
+	}
 }));
 
 export default function CustomizedBadges() {
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
+	const cart = useSelector(state => state.cart);
 
 	function handleClick(event) {
-		setAnchorEl(anchorEl ? null : event.currentTarget);
+		if(cart.items && cart.items.length !== 0) {
+			setAnchorEl(anchorEl ? null : event.currentTarget);
+		}
 	}
 
 	const open = Boolean(anchorEl);
 	const id = open ? 'simple-popper' : undefined;
+	let totalize = 0;
+
+	for(const item of cart.items) {
+		totalize += item.price;
+	}
 
 	return (
 		<>
 			<IconButton aria-label="Cart" aria-describedby={id} variant="contained" onClick={handleClick}>
-				<StyledBadge badgeContent={4} color="primary">
+				<StyledBadge badgeContent={cart.items ? cart.items.length : 0} color="primary">
 					<ShoppingCartIcon color="inherit" />
 				</StyledBadge>
 			</IconButton>
 
-			<Popper id={id} open={open} anchorEl={anchorEl} transition>
+			<Popper id={id} open={open} anchorEl={anchorEl} placement="bottom-end" transition>
 				{({ TransitionProps }) => (
 					<Fade {...TransitionProps} timeout={350}>
-						<Paper>
-							<Typography className={classes.typography}>The content of the Popper.</Typography>
+						<Paper className={classes.paper}>
+							{cart.items && cart.items.map((item, index)=> (
+									<CartItem key={index} productIndex={index} product={item}/>
+							))}
+
+							{cart.items && cart.items.length !== 0 && (
+								<>
+									<Divider />
+									<Typography variant="h5" component="h2" className={classes.typography}>
+										Total: <CurrencyFormat value={totalize} displayType="text" prefix="R$ " decimalSeparator="," thousandSeparator="." />
+									</Typography>
+								</>
+							)}
 						</Paper>
 					</Fade>
 				)}

@@ -7,6 +7,12 @@ const INITIAL_STATE = {
 	fetched: false,
 	products: [],
 	error: null,
+	cartIsOpen: false,
+	cart: {
+		isOpen: false,
+		items: [],
+
+	},
 };
 
 function products(state = INITIAL_STATE, action) {
@@ -19,6 +25,16 @@ function products(state = INITIAL_STATE, action) {
 		return {
 			...state, fetching: false, fetched: true, products: action.payload,
 		};
+	case 'ADD_TO_CART':
+		return {
+			...state, cart: { items: [...state.cart.items, action.item] },
+		};
+	case 'REMOVE_TO_CART':
+		const newItems = state.cart.items.filter((item, index)=> index !== action.itemIndex)
+		return {
+			...state, cart: { items: newItems },
+		};
+
 
 	default:
 		return state;

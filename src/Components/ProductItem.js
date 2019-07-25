@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
+import { useDispatch } from 'react-redux';
 import productDefaultImage from '../images/product-default.jpg';
 
 const useStyles = makeStyles({
@@ -42,6 +43,15 @@ export default function ProductItem(props) {
 
 	const classes = useStyles();
 
+	const dispatch = useDispatch();
+
+	function addToCart() {
+		dispatch({
+			type: 'ADD_TO_CART',
+			item: product,
+		});
+	}
+
 	return (
 		<Card className={classes.card}>
 			<CardContent>
@@ -58,7 +68,7 @@ export default function ProductItem(props) {
 			</CardContent>
 			<CardActions className={classes.actions}>
 				<Button size="small">Learn More</Button>
-				<Button size="small">Add To Cart</Button>
+				<Button size="small" onClick={addToCart}>Add To Cart</Button>
 			</CardActions>
 		</Card>
 	);
