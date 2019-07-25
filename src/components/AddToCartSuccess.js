@@ -15,11 +15,17 @@ export default function AddToCartSucess() {
 	const open = useSelector(state => state.cartSuccessFeedbackIsOpen);
 	const dispatch = useDispatch();
 
+	/**
+	 * Close added cart success feedback
+	 *
+	 * @param {*} event
+	 * @param {String} reason
+	 * @returns
+	 */
 	function handleClose(event, reason) {
 		if (reason === 'clickaway') {
 			return;
 		}
-
 		dispatch({ type: 'CLOSE_CART_SUCCESS_FEEDBACK' });
 	}
 	return (

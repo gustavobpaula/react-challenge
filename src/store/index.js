@@ -32,12 +32,14 @@ function products(state = INITIAL_STATE, action) {
 		};
 	case 'ADD_TO_CART':
 		return {
-			...state, cartSuccessFeedbackIsOpen: true, cart: { items: [...state.cart.items, action.item] },
+			...state,
+			cartSuccessFeedbackIsOpen: true,
+			cart: { items: [...state.cart.items, action.item] },
 		};
 	case 'REMOVE_TO_CART':
-		const newItems = state.cart.items.filter((item, index) => index !== action.itemIndex);
 		return {
-			...state, cart: { items: newItems },
+			...state,
+			cart: { items: state.cart.items.filter((item, index) => index !== action.itemIndex) },
 		};
 	case 'OPEN_QUICK_VIEW':
 		return {

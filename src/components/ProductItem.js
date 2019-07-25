@@ -1,9 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import { CardActions, CardContent, CardMedia } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import {
+	Card, CardActions, CardContent, CardMedia, Typography, Button,
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
 import { useDispatch } from 'react-redux';
@@ -45,6 +44,10 @@ export default function ProductItem(props) {
 
 	const dispatch = useDispatch();
 
+	/**
+	 * Add item to Cart
+	 *
+	 */
 	function addToCart() {
 		dispatch({
 			type: 'ADD_TO_CART',
@@ -52,6 +55,10 @@ export default function ProductItem(props) {
 		});
 	}
 
+	/**
+	 * Open QuickView
+	 *
+	 */
 	function openQuickView() {
 		dispatch({
 			type: 'OPEN_QUICK_VIEW',
@@ -68,7 +75,11 @@ export default function ProductItem(props) {
 				<Typography variant="body2" component="p" className={classes.title}>
 					{product.title}
 				</Typography>
-				<CardMedia className={classes.media} image={product.picture || productDefaultImage} title={product.title} />
+				<CardMedia
+					className={classes.media}
+					image={product.picture || productDefaultImage}
+					title={product.title}
+				/>
 				<Typography variant="h5" component="h2">
 					<CurrencyFormat value={product.price} displayType="text" prefix="R$ " decimalSeparator="," thousandSeparator="." />
 				</Typography>

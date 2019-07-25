@@ -1,13 +1,11 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
 import {
-	CardActions, CardContent, CardMedia, Typography, Button,
+	Icon, Card, CardActions, CardContent, CardMedia, Typography, Button,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
 import { useDispatch } from 'react-redux';
-import Icon from '@material-ui/core/Icon';
 import productDefaultImage from '../images/product-default.jpg';
 
 
@@ -45,6 +43,10 @@ export default function CartItem(props) {
 
 	const dispatch = useDispatch();
 
+	/**
+	 * Remove item to Cart
+	 *
+	 */
 	function removeToCart() {
 		dispatch({
 			type: 'REMOVE_TO_CART',
@@ -55,7 +57,11 @@ export default function CartItem(props) {
 	return (
 		<Card className={classes.card}>
 			<div className={classes.details}>
-				<CardMedia className={classes.media} image={product.picture || productDefaultImage} title={product.title} />
+				<CardMedia
+					className={classes.media}
+					image={product.picture || productDefaultImage}
+					title={product.title}
+				/>
 				<CardContent>
 					<Typography variant="body2" component="p" className={classes.title}>
 						{product.title}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	IconButton, Badge, Popper, Fade, Paper, Typography, Divider, ClickAwayListener,
 } from '@material-ui/core';
@@ -31,24 +31,32 @@ const useStyles = makeStyles(theme => ({
 
 export default function CustomizedBadges() {
 	const classes = useStyles();
-	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [anchorEl, setAnchorEl] = useState(null);
 	const cart = useSelector(state => state.cart);
+	const open = Boolean(anchorEl);
+	const id = open ? 'simple-popper' : undefined;
+	let totalize = 0;
 
+	/**
+	 * Close cart when click out of
+	 *
+	 */
 	function handleClickAway() {
 		if (anchorEl) {
 			setAnchorEl(null);
 		}
 	}
 
+	/**
+	 * Handle Click Cart
+	 *
+	 * @param {*} event
+	 */
 	function handleClick(event) {
 		if (cart.items && cart.items.length !== 0) {
 			setAnchorEl(anchorEl ? null : event.currentTarget);
 		}
 	}
-
-	const open = Boolean(anchorEl);
-	const id = open ? 'simple-popper' : undefined;
-	let totalize = 0;
 
 	/* eslint-disable */
 	for (const item of cart.items) {
@@ -57,17 +65,16 @@ export default function CustomizedBadges() {
 
 	return (
 
-		<ClickAwayListener onClickAway={handleClickAway}>
-			<div>
+		<>
+			<IconButton aria-label="Cart" aria-describedby={id} variant="contained" onClick={handleClick}>
+				<StyledBadge badgeContent={cart.items ? cart.items.length : 0} color="primary">
+					<ShoppingCartIcon color="inherit" />
+				</StyledBadge>
+			</IconButton>
 
-				<IconButton aria-label="Cart" aria-describedby={id} variant="contained" onClick={handleClick}>
-					<StyledBadge badgeContent={cart.items ? cart.items.length : 0} color="primary">
-						<ShoppingCartIcon color="inherit" />
-					</StyledBadge>
-				</IconButton>
-
-				<Popper id={id} open={open} anchorEl={anchorEl} placement="bottom-end" transition>
-					{({ TransitionProps }) => (
+			<Popper id={id} open={open} anchorEl={anchorEl} placement="bottom-end" transition>
+				{({ TransitionProps }) => (
+					<ClickAwayListener onClickAway={handleClickAway}>
 						<Fade {...TransitionProps} timeout={350}>
 							<Paper className={classes.paper}>
 								{cart.items && cart.items.map((item, index) => (
@@ -84,10 +91,11 @@ export default function CustomizedBadges() {
 								)}
 							</Paper>
 						</Fade>
-					)}
-				</Popper>
-			</div>
-		</ClickAwayListener>
+					</ClickAwayListener>
+				)}
+			</Popper>
+		</>
+
 
 	);
 }
