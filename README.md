@@ -7,9 +7,9 @@ Vitrine com Minicart e QuickView
 
 ## Serviço Rest
 
-Criar o backend não é o foco deste teste, portanto está sendo disponibilizado um serviço Rest que deve ser utilizado para recuperar a lista de produtos do projeto.
+É necessário rodar o serviço para recuperar a lista de produtos do projeto.
 
-Para rodar o serviço, é necessário instalar o json-server:
+Para isso, é necessário instalar o json-server:
 
 `npm install -g json-server`
 
