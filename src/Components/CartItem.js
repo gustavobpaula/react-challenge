@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import { CardActions, CardContent, CardMedia } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import {
+	CardActions, CardContent, CardMedia, Typography, Button,
+} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
 import { useDispatch } from 'react-redux';

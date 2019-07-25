@@ -13,6 +13,10 @@ const INITIAL_STATE = {
 		items: [],
 
 	},
+	quickView: {
+		isOpen: false,
+		product: null,
+	},
 };
 
 function products(state = INITIAL_STATE, action) {
@@ -33,6 +37,14 @@ function products(state = INITIAL_STATE, action) {
 		const newItems = state.cart.items.filter((item, index) => index !== action.itemIndex);
 		return {
 			...state, cart: { items: newItems },
+		};
+	case 'OPEN_QUICK_VIEW':
+		return {
+			...state, quickView: { isOpen: true, product: action.item },
+		};
+	case 'CLOSE_QUICK_VIEW':
+		return {
+			...state, quickView: { isOpen: false },
 		};
 
 

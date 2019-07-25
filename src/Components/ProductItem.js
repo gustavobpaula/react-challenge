@@ -52,6 +52,13 @@ export default function ProductItem(props) {
 		});
 	}
 
+	function openQuickView() {
+		dispatch({
+			type: 'OPEN_QUICK_VIEW',
+			item: product,
+		});
+	}
+
 	return (
 		<Card className={classes.card}>
 			<CardContent>
@@ -67,7 +74,7 @@ export default function ProductItem(props) {
 				</Typography>
 			</CardContent>
 			<CardActions className={classes.actions}>
-				<Button size="small">Learn More</Button>
+				<Button size="small" onClick={openQuickView}>Learn More</Button>
 				<Button size="small" onClick={addToCart}>Add To Cart</Button>
 			</CardActions>
 		</Card>

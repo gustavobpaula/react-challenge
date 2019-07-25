@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import Header from './components/Header';
 import ProductList from './components/ProductList';
+import QuickView from './components/QuickView';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 		});
 	});
 
+
 	return (
 		<Provider store={store}>
 			<div className="App">
@@ -28,6 +30,8 @@ function App() {
 						<ProductList />
 					</Grid>
 				</Container>
+				<QuickView />
+
 			</div>
 		</Provider>
 	);
