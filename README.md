@@ -1,5 +1,10 @@
 Vitrine com Minicart e QuickView
 
+## Rodar
+
+* Instale as dependências do projeto rodando `npm i`
+* Rode o projeto com o comando `npm start`
+
 ## Serviço Rest
 
 Criar o backend não é o foco deste teste, portanto está sendo disponibilizado um serviço Rest que deve ser utilizado para recuperar a lista de produtos do projeto.
