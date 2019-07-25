@@ -1,5 +1,7 @@
 import React from 'react';
-import {IconButton, Badge, Popper, Fade, Paper, Typography, Divider } from '@material-ui/core';
+import {
+	IconButton, Badge, Popper, Fade, Paper, Typography, Divider,
+} from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useSelector } from 'react-redux';
@@ -24,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 	paper: {
 		maxHeight: 450,
 		overflowY: 'auto',
-	}
+	},
 }));
 
 export default function CustomizedBadges() {
@@ -33,7 +35,7 @@ export default function CustomizedBadges() {
 	const cart = useSelector(state => state.cart);
 
 	function handleClick(event) {
-		if(cart.items && cart.items.length !== 0) {
+		if (cart.items && cart.items.length !== 0) {
 			setAnchorEl(anchorEl ? null : event.currentTarget);
 		}
 	}
@@ -42,7 +44,8 @@ export default function CustomizedBadges() {
 	const id = open ? 'simple-popper' : undefined;
 	let totalize = 0;
 
-	for(const item of cart.items) {
+	// prettier-ignore
+	for (const item of cart.items) {
 		totalize += item.price;
 	}
 
@@ -58,8 +61,8 @@ export default function CustomizedBadges() {
 				{({ TransitionProps }) => (
 					<Fade {...TransitionProps} timeout={350}>
 						<Paper className={classes.paper}>
-							{cart.items && cart.items.map((item, index)=> (
-									<CartItem key={index} productIndex={index} product={item}/>
+							{cart.items && cart.items.map((item, index) => (
+								<CartItem key={index} productIndex={index} product={item} />
 							))}
 
 							{cart.items && cart.items.length !== 0 && (

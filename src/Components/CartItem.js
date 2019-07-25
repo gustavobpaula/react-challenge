@@ -7,9 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import CurrencyFormat from 'react-currency-format';
 import { useDispatch } from 'react-redux';
-import productDefaultImage from '../images/product-default.jpg';
 import Icon from '@material-ui/core/Icon';
-
+import productDefaultImage from '../images/product-default.jpg';
 
 
 const useStyles = makeStyles({
@@ -17,7 +16,7 @@ const useStyles = makeStyles({
 		maxWidth: 300,
 	},
 	button: {
-		minWidth: 0
+		minWidth: 0,
 	},
 	media: {
 		width: 50,
@@ -35,7 +34,7 @@ const useStyles = makeStyles({
 		textOverflow: 'ellipsis',
 		whiteSpace: 'nowrap',
 		overflow: 'hidden',
-		width:150,
+		width: 150,
 	},
 });
 
@@ -85,4 +84,5 @@ CartItem.propTypes = {
 		picture: PropTypes.string,
 		price: PropTypes.number,
 	}).isRequired,
+	productIndex: PropTypes.number.isRequired,
 };

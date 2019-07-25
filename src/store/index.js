@@ -30,7 +30,7 @@ function products(state = INITIAL_STATE, action) {
 			...state, cart: { items: [...state.cart.items, action.item] },
 		};
 	case 'REMOVE_TO_CART':
-		const newItems = state.cart.items.filter((item, index)=> index !== action.itemIndex)
+		const newItems = state.cart.items.filter((item, index) => index !== action.itemIndex);
 		return {
 			...state, cart: { items: newItems },
 		};
