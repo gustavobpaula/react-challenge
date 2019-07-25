@@ -7,6 +7,7 @@ import store from './store';
 import Header from './components/Header';
 import ProductList from './components/ProductList';
 import QuickView from './components/QuickView';
+import AddToCartSucess from './components/AddToCartSuccess';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
 					</Grid>
 				</Container>
 				<QuickView />
+				<AddToCartSucess />
 
 			</div>
 		</Provider>

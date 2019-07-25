@@ -8,6 +8,7 @@ const INITIAL_STATE = {
 	products: [],
 	error: null,
 	cartIsOpen: false,
+	cartSuccessFeedbackIsOpen: false,
 	cart: {
 		isOpen: false,
 		items: [],
@@ -31,7 +32,7 @@ function products(state = INITIAL_STATE, action) {
 		};
 	case 'ADD_TO_CART':
 		return {
-			...state, cart: { items: [...state.cart.items, action.item] },
+			...state, cartSuccessFeedbackIsOpen: true, cart: { items: [...state.cart.items, action.item] },
 		};
 	case 'REMOVE_TO_CART':
 		const newItems = state.cart.items.filter((item, index) => index !== action.itemIndex);
@@ -46,7 +47,10 @@ function products(state = INITIAL_STATE, action) {
 		return {
 			...state, quickView: { isOpen: false },
 		};
-
+	case 'CLOSE_CART_SUCCESS_FEEDBACK':
+		return {
+			...state, cartSuccessFeedbackIsOpen: false,
+		};
 
 	default:
 		return state;

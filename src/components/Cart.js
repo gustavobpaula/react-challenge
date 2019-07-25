@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-	IconButton, Badge, Popper, Fade, Paper, Typography, Divider,
+	IconButton, Badge, Popper, Fade, Paper, Typography, Divider, ClickAwayListener,
 } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -34,6 +34,12 @@ export default function CustomizedBadges() {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const cart = useSelector(state => state.cart);
 
+	function handleClickAway() {
+		if (anchorEl) {
+			setAnchorEl(null);
+		}
+	}
+
 	function handleClick(event) {
 		if (cart.items && cart.items.length !== 0) {
 			setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -44,39 +50,44 @@ export default function CustomizedBadges() {
 	const id = open ? 'simple-popper' : undefined;
 	let totalize = 0;
 
-	// prettier-ignore
+	/* eslint-disable */
 	for (const item of cart.items) {
 		totalize += item.price;
 	}
 
 	return (
-		<>
-			<IconButton aria-label="Cart" aria-describedby={id} variant="contained" onClick={handleClick}>
-				<StyledBadge badgeContent={cart.items ? cart.items.length : 0} color="primary">
-					<ShoppingCartIcon color="inherit" />
-				</StyledBadge>
-			</IconButton>
 
-			<Popper id={id} open={open} anchorEl={anchorEl} placement="bottom-end" transition>
-				{({ TransitionProps }) => (
-					<Fade {...TransitionProps} timeout={350}>
-						<Paper className={classes.paper}>
-							{cart.items && cart.items.map((item, index) => (
-								<CartItem key={index} productIndex={index} product={item} />
-							))}
+		<ClickAwayListener onClickAway={handleClickAway}>
+			<div>
 
-							{cart.items && cart.items.length !== 0 && (
+				<IconButton aria-label="Cart" aria-describedby={id} variant="contained" onClick={handleClick}>
+					<StyledBadge badgeContent={cart.items ? cart.items.length : 0} color="primary">
+						<ShoppingCartIcon color="inherit" />
+					</StyledBadge>
+				</IconButton>
+
+				<Popper id={id} open={open} anchorEl={anchorEl} placement="bottom-end" transition>
+					{({ TransitionProps }) => (
+						<Fade {...TransitionProps} timeout={350}>
+							<Paper className={classes.paper}>
+								{cart.items && cart.items.map((item, index) => (
+									<CartItem key={index} productIndex={index} product={item} />
+								))}
+
+								{cart.items && cart.items.length !== 0 && (
 								<>
 									<Divider />
 									<Typography variant="h5" component="h2" className={classes.typography}>
 										Total: <CurrencyFormat value={totalize} displayType="text" prefix="R$ " decimalSeparator="," thousandSeparator="." />
 									</Typography>
 								</>
-							)}
-						</Paper>
-					</Fade>
-				)}
-			</Popper>
-		</>
+								)}
+							</Paper>
+						</Fade>
+					)}
+				</Popper>
+			</div>
+		</ClickAwayListener>
+
 	);
 }
